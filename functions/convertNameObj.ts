@@ -6,7 +6,12 @@ const nomes: string[] = ['Victor', 'Emma']
 const arraFinal:any = []
 //get infos
 const req:any = {
-    nhe: 'name'
+    nhe: 'name',
+    idade: {
+        type: 'number',
+        range: [1, 123]
+    }
+
 }
 
 function getRandomNumber(array: any[]) {
@@ -22,7 +27,7 @@ const keys = getKeysFromReq(req)
 
 
 
-function createAnObject(array: any[], keys: string[], arrayIndex?: number) {
+function createAnObject(array: any[], keys: string[], ) {
     const finalObj: any = {}
     const randomNumber = getRandomNumber(nomes)
 
@@ -35,9 +40,7 @@ function createAnObject(array: any[], keys: string[], arrayIndex?: number) {
     return array
 }//modelo: [ { nhe: 'Emma' } ]
 
-// arraFinal[0]= {//preciso criar algo primeiro {nhe1}
-//     [keys[0]]: nomes[randomNumber]
-// }
+
 console.log(createAnObject([], keys))
 
-export {}
+export default createAnObject
