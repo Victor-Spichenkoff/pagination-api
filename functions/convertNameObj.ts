@@ -1,18 +1,21 @@
 // nhe: name
+
+import { Pagination } from "../data/number"
+import { selectAndGiveType } from "./giveProperty"
+
 //nhe:'Victor'
 const nomes: string[] = ['Victor', 'Emma']
-
-
-const arraFinal:any = []
-//get infos
 const req:any = {
     nhe: 'name',
     idade: {
         type: 'number',
         range: [1, 123]
     }
-
 }
+
+const arraFinal:any = []
+//get infos
+
 
 function getRandomNumber(array: any[]) {
     return Math.floor(Math.random() * array.length)
@@ -22,17 +25,23 @@ function getKeysFromReq(obj: object): string[] {
     return Object.keys(obj)
 }
 
+function getValues(obj: object) {
+    return Object.values(obj)
+}
 
-const keys = getKeysFromReq(req)
 
 
 
-function createAnObject(array: any[], keys: string[], ) {
+
+function createAnObject(array: any[], fields: object, pagination: Pagination, index: number): any[] {
+    //array final(com tudo) // campos com valor e chave
     const finalObj: any = {}
-    const randomNumber = getRandomNumber(nomes)
+    const types = getValues(fields)
+
+    const keys = getKeysFromReq(fields)
 
     keys.forEach((key, i )=> {
-        finalObj[key] = nomes[randomNumber]
+        finalObj[key] = selectAndGiveType(types[i], pagination, index)
     })
 
     array.push(finalObj)
@@ -41,6 +50,18 @@ function createAnObject(array: any[], keys: string[], ) {
 }//modelo: [ { nhe: 'Emma' } ]
 
 
-console.log(createAnObject([], keys))
+
+//testes
+
+const pagination = {
+    page: 1,
+    pageSize: 20,
+    totalPages: 3
+}
+
+
+
+// console.log(createAnObject([], req, pagination, 1))
 
 export default createAnObject
+export { getKeysFromReq, getValues }

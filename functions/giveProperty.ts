@@ -1,9 +1,11 @@
 import createAnObject from "./convertNameObj";
 import getRandomName from "../data/names";
 import getFullName from '../data/fullName'
-import { Pagination, ascendent, descendant, getNumberInInterval } from '../data/number'
+import { Pagination, ascendent, descendant, getNumberInInterval, getSimpleNumber } from '../data/number'
 import getText, { Sizes } from "../data/text";
 import { generateId, getRandomMovie } from "../data/extraTypes";
+import getArrayFrom from "../data/array";
+import getObject from "../data/object";
 //recebe as props de cada key dentro de 'fields'
 
 type acceptedEntries = 'string' | 'object'
@@ -22,6 +24,8 @@ function givePropertyStrings(type:string) {
     if(type == 'id') return generateId()
 
     if(type == 'movie') return getRandomMovie()
+
+    if(type == 'number') return getSimpleNumber()//para o array
 }
 
 
@@ -48,14 +52,12 @@ function givePropertyNumbers(pagination: Pagination, config: NumberConfig, times
 
 
 //array {
-// function givePropertyArrays(infosArray: string[]) {
-//     infosArray.forEach(type => {
-//         if()
-//     })
-// }
+function givePropertyArrays(infosArray: string[]) {
+    return getArrayFrom(infosArray)
+}
 
 
-function selectType(field: any, pagination: Pagination, times: number){
+function selectAndGiveType(field: any, pagination: Pagination, times: number){
     if(typeof field == 'string') {
         return givePropertyStrings(field)
     } 
@@ -64,12 +66,29 @@ function selectType(field: any, pagination: Pagination, times: number){
         if(field.type == 'number' || field.type == "asc" || field.type == "desc") {
             return givePropertyNumbers(pagination, field, times)
         }
+
+        if(field.type == 'array') {
+            return givePropertyArrays(field.fields)
+        }
+
+        if(field.type == 'object') {
+            return getObject(field.fields, pagination, times)
+        }
+
     }
+
+    return 'Tipo inválido'
 }
 //teste
-const config = {
-    type: 'desc',
-    range: [0, 29]
+const oneField = {
+    type: 'object',
+    fields: {
+        nhe: 'name',
+        idade: {
+            type: 'number',
+            range: [1, 123]
+        }
+    }
 }
 
 const pagination = {
@@ -77,11 +96,12 @@ const pagination = {
     pageSize: 20,
     totalPages: 3
 }
-console.log(selectType(config, pagination, 1))
+
+// console.log(selectAndGiveType(oneField, pagination, 1))
 
 
 
-export { givePropertyStrings, givePropertyNumbers/*, givePropertyArrays*/ }
+export { givePropertyStrings, givePropertyNumbers, selectAndGiveType/*, givePropertyArrays*/ }
 //crescente
 // const config = {
 //     type: 'desc',

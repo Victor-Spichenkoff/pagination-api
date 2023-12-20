@@ -27,4 +27,8 @@ function descendant(pagination: Pagination, range: number[], times: number) {
     return lowest
 }
 
-export { getNumberInInterval, ascendent, descendant, Pagination }
+function getSimpleNumber() {//para o array
+    return  Math.floor(Math.random() * 100)
+}
+
+export { getNumberInInterval, ascendent, descendant, getSimpleNumber, Pagination }
