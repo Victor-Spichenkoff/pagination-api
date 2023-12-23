@@ -9,32 +9,36 @@ interface Req {
 }
 
 function makeCurentPageArray(req: Req) {//pagination e fields
-    const finalArray: object[] = []
-
-    for (let itemCont = 0; itemCont < req.pagination.pageSize; itemCont++) {
-        createAnObject(finalArray, req.fields, req.pagination, itemCont)
+    try {
+        const finalArray: object[] = []
+        
+        for (let itemCont = 0; itemCont < req.pagination.pageSize; itemCont++) {
+            createAnObject(finalArray, req.fields, req.pagination, itemCont)
+        }
+    
+        return finalArray
+    } catch(e) {
+        throw 'Error: Invalid Data'
     }
-
-    return finalArray
 }
 
-const testReq = {
-    pagination: {
-        page: 2,
-        pageSize: 5,
-        totalPages: 3
-    },
-    fields: {
-        nhe: {
-            type: 'object',
-            fields: {
-                nome: 'name',
-                idade: {
-                    type: 'number',
-                    range: [1, 123]
-                }
-            }
-        }
+// const testReq = {
+//     pagination: {
+//         page: 2,
+//         pageSize: 5,
+//         totalPages: 3
+//     },
+//     fields: {
+//         nhe: {
+//             type: 'object',
+//             fields: {
+//                 nome: 'name',
+//                 idade: {
+//                     type: 'number',
+//                     range: [1, 123]
+//                 }
+//             }
+//         }
         // nhe: 'name'
         // idade: {
         //     type: 'number',
@@ -48,7 +52,9 @@ const testReq = {
     //         type: 'array', 
     //         fields: ['name', 'number']
     //     }
-    }
-}
+//     }
+// }
 
-console.log(makeCurentPageArray(testReq))
+export default makeCurentPageArray
+
+// console.log(makeCurentPageArray(testReq))

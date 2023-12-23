@@ -35,18 +35,22 @@ function getValues(obj: object) {
 
 function createAnObject(array: any[], fields: object, pagination: Pagination, index: number): any[] {
     //array final(com tudo) // campos com valor e chave
-    const finalObj: any = {}
-    const types = getValues(fields)
-
-    const keys = getKeysFromReq(fields)
-
-    keys.forEach((key, i )=> {
-        finalObj[key] = selectAndGiveType(types[i], pagination, index)
-    })
-
-    array.push(finalObj)
-
-    return array
+    try{
+        const finalObj: any = {}
+        const types = getValues(fields)
+    
+        const keys = getKeysFromReq(fields)
+    
+        keys.forEach((key, i )=> {
+            finalObj[key] = selectAndGiveType(types[i], pagination, index)
+        })
+    
+        array.push(finalObj)
+    
+        return array
+    } catch(e) {
+        throw 'Error: Invalid formatting'
+    }
 }//modelo: [ { nhe: 'Emma' } ]
 
 

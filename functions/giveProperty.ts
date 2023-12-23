@@ -6,9 +6,9 @@ import getText, { Sizes } from "../data/text";
 import { generateId, getRandomMovie } from "../data/extraTypes";
 import getArrayFrom from "../data/array";
 import getObject from "../data/object";
+import getImage from "../data/imgs";
 //recebe as props de cada key dentro de 'fields'
 
-type acceptedEntries = 'string' | 'object'
 
 function givePropertyStrings(type:string) {
     if(type == 'name') return getRandomName()
@@ -25,7 +25,7 @@ function givePropertyStrings(type:string) {
 
     if(type == 'movie') return getRandomMovie()
 
-    if(type == 'number') return getSimpleNumber()//para o array
+    if(type == 'number') return getSimpleNumber()//para o arraynpm run dev
 }
 
 
@@ -58,26 +58,30 @@ function givePropertyArrays(infosArray: string[]) {
 
 
 function selectAndGiveType(field: any, pagination: Pagination, times: number){
-    if(typeof field == 'string') {
-        return givePropertyStrings(field)
-    } 
-
-    if(typeof field == 'object') {
-        if(field.type == 'number' || field.type == "asc" || field.type == "desc") {
-            return givePropertyNumbers(pagination, field, times)
+    try {
+        if(typeof field == 'string') {
+            return givePropertyStrings(field)
+        } 
+    
+        if(typeof field == 'object') {
+            if(field.type == 'number' || field.type == "asc" || field.type == "desc") {
+                return givePropertyNumbers(pagination, field, times)
+            }
+    
+            if(field.type == 'array') {
+                return givePropertyArrays(field.fields)
+            }
+    
+            if(field.type == 'object') {
+                return getObject(field.fields, pagination, times)
+            }
+    
         }
-
-        if(field.type == 'array') {
-            return givePropertyArrays(field.fields)
-        }
-
-        if(field.type == 'object') {
-            return getObject(field.fields, pagination, times)
-        }
-
+    } catch(e) {
+        throw 'Error: Invalid type, check the documentation'
     }
 
-    return 'Tipo inválido'
+    // return 'Invalid type'
 }
 //teste
 const oneField = {
