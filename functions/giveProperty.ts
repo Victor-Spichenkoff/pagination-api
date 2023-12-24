@@ -25,7 +25,9 @@ function givePropertyStrings(type:string) {
 
     if(type == 'movie') return getRandomMovie()
 
-    if(type == 'number') return getSimpleNumber()//para o arraynpm run dev
+    if(type == 'number') return getSimpleNumber()//para o array
+
+    if(type == 'image') return getImage()
 }
 
 

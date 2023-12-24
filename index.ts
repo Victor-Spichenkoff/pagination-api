@@ -17,8 +17,16 @@ app.put('/pagination', (req, res) => {
     
     try {
         const thisPageArray = makeCurentPageArray(req.body)
+        const finalObject = {
+            pagination: req.body.pagination,
+            itens: thisPageArray
+        }
+
+        if(req.body.pagination.page > req.body.pagination.totalPages) return
+
+
     
-        res.send(thisPageArray)
+        res.send(finalObject)
     } catch(e) {
         res.status(400).send({ msg: e})
     }
