@@ -22,16 +22,18 @@ function pickRandomElemnt(array: string[]) {
 }
 
 function getFullName() {
-    const first = pickRandomElemnt(names)
-
-    const randNumber = Math.floor(Math.random() * 10)
-    const half = randNumber < 3 ? pickRandomElemnt(letters) : '' 
+    try {
+        const first = pickRandomElemnt(names)
     
-    const last = pickRandomElemnt(lastName) 
-    
-    if(half) return `${first} ${half}. ${last}`
-    
-    return `${first} ${last}`
+        const randNumber = Math.floor(Math.random() * 10)
+        const half = randNumber < 3 ? pickRandomElemnt(letters) : '' 
+        
+        const last = pickRandomElemnt(lastName) 
+        
+        if(half) return `${first} ${half}. ${last}`
+        
+        return `${first} ${last}`
+    } catch(e) { throw 'Error: Full Name' }
 }
 
 export default getFullName

@@ -80,7 +80,7 @@ function selectAndGiveType(field: any, pagination: Pagination, times: number){
     
         }
     } catch(e) {
-        throw 'Error: Invalid type, check the documentation'
+        throw e
     }
 
     // return 'Invalid type'

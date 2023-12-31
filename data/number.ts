@@ -9,22 +9,30 @@ interface Pagination {
 }
 
 function ascendent(pagination: Pagination, range: number[], times: number) {//times==vezes que já passou
-    const { page, pageSize } = pagination
-
-    const lastBiggest = range[0] + pageSize * (page-1) + (1 * times)
-
-    if(lastBiggest > range[1]) return range[1]
-    return lastBiggest
+    try{
+        const { page, pageSize } = pagination
+    
+        const lastBiggest = range[0] + pageSize * (page-1) + (1 * times)
+    
+        if(lastBiggest > range[1]) return range[1]
+        return lastBiggest
+    } catch(e) {
+        throw 'Error: number'
+    }
 }
 
 
 function descendant(pagination: Pagination, range: number[], times: number) {
-    const { page, pageSize } = pagination
+    try{
+        const { page, pageSize } = pagination
 
-    const lowest = range[1] - pageSize * (page-1) - (1 * times)
-    
-    if(lowest < range[0]) return range[0]
-    return lowest
+        const lowest = range[1] - pageSize * (page-1) - (1 * times)
+        
+        if(lowest < range[0]) return range[0]
+        return lowest
+    } catch(e) {
+        throw 'Error: number'
+    }
 }
 
 function getSimpleNumber() {//para o array

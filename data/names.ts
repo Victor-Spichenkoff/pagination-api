@@ -24,9 +24,11 @@ const names = [
 ]
 
 function getRandomName() {
-    const randomNumber = Math.floor(Math.random() * names.length)
+    try {
+        const randomNumber = Math.floor(Math.random() * names.length)
 
-    return names[randomNumber]
+        return names[randomNumber]
+    } catch(e) { throw 'Error: Name' }
 }
 
 export default getRandomName

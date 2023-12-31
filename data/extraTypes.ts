@@ -1,14 +1,16 @@
 function generateId(): string {
-    const tamanhoDoId = 10;
-    const caracteresPermitidos = '0123456789qwertyuiopasdfghjklzxcvbnm';
-    let idAleatorio = '';
-  
-    for (let i = 0; i < tamanhoDoId; i++) {
-      const indiceAleatorio = Math.floor(Math.random() * caracteresPermitidos.length);
-      idAleatorio += caracteresPermitidos.charAt(indiceAleatorio);
-    }
-  
-    return idAleatorio;
+    try {
+        const tamanhoDoId = 10;
+        const caracteresPermitidos = '0123456789qwertyuiopasdfghjklzxcvbnm';
+        let idAleatorio = '';
+      
+        for (let i = 0; i < tamanhoDoId; i++) {
+          const indiceAleatorio = Math.floor(Math.random() * caracteresPermitidos.length);
+          idAleatorio += caracteresPermitidos.charAt(indiceAleatorio);
+        }
+      
+        return idAleatorio;
+    } catch(e) { throw 'Error: Id' }
 }
 
 const movies = [  
@@ -36,8 +38,10 @@ const movies = [
 ]
 
 function getRandomMovie() {
-    const i = Math.floor(Math.random() * movies.length)
-    return movies[i]
+    try {
+        const i = Math.floor(Math.random() * movies.length)
+        return movies[i]
+    } catch(e) { throw 'Error: Movie' }
 }
 
 export { getRandomMovie, generateId }

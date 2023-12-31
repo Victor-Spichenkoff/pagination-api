@@ -95,7 +95,7 @@ do pensamento. Durante o caminho para a cidade ele não pensou em mais nada exce
 grande pedido de brocas que tinha esperanças de receber naquele dia.`
 
 function randomT1() {
-   return t1[Math.floor(Math.random() * t1.length)]
+   return t1[Math.floor(Math.random() * 10)]
 }
 
 const allTextTypes: string[] = ['', randomT1(), t2, t3, t4, t5]
@@ -103,10 +103,16 @@ const allTextTypes: string[] = ['', randomT1(), t2, t3, t4, t5]
 
 type Sizes = 1 | 2 | 3 | 4 | 5
 function getText(textSize: Sizes):string {
-    if(allTextTypes[textSize]) {
-        return allTextTypes[textSize]
-    }
-    throw 'Invalid size'
+    try {
+        if(allTextTypes[textSize] && textSize != 1) {
+            return allTextTypes[textSize]
+        } 
+
+        if(textSize == 1) {
+            return randomT1()
+        }
+        throw 'Invalid size'
+    } catch(e) { throw 'Error: Text' }
 }
 
 export default getText

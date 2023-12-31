@@ -25,7 +25,6 @@ app.put('/pagination', (req, res) => {
         if(req.body.pagination.page > req.body.pagination.totalPages) return
 
 
-    
         res.send(finalObject)
     } catch(e) {
         res.status(400).send({ msg: e})

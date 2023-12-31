@@ -49,7 +49,7 @@ function createAnObject(array: any[], fields: object, pagination: Pagination, in
     
         return array
     } catch(e) {
-        throw 'Error: Invalid formatting'
+        throw e
     }
 }//modelo: [ { nhe: 'Emma' } ]
 

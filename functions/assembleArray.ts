@@ -18,7 +18,7 @@ function makeCurentPageArray(req: Req) {//pagination e fields
     
         return finalArray
     } catch(e) {
-        throw 'Error: Invalid Data'
+        throw e
     }
 }
 
