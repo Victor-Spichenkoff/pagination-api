@@ -7,6 +7,9 @@ const app:Express = express()
 app.use(express.json())
 app.use(cors())
 
+
+app.get('/teste', (req, res) => res.send('Paginação'))
+
 app.get('/', (req, res) => {res.send('Olá')})
 
 
