@@ -352,7 +352,7 @@ O retorno será um objeto com os campos:
 }
 ~~~
 
-Retorno/Saída: 
+Return/Saída: 
 
 ~~~
 {
