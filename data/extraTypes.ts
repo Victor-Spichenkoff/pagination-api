@@ -45,3 +45,69 @@ function getRandomMovie() {
 }
 
 export { getRandomMovie, generateId }
+
+
+
+const testeFull = {
+    "pagination": {
+        "page": 2,
+        "pageSize": 1,
+        "totalPages": 3
+    },
+    "fields": {
+        "nome": "fullName",
+        "ditado": "text_1",
+        "likes": {
+            "type": "desc", 
+            "range": [1, 1000]
+        },
+        "img": "image",
+        "meu_objeto": {
+            "type": "object",
+            "fields": {
+                "nome": "name",
+                "idade": {
+                    "type": "number",
+                    "range": [1, 123]
+                },
+                "meu_objeto": {
+                    "type": "object",
+                    "fields": {
+                        "nome": "name",
+                        "idade": {
+                            "type": "number",
+                            "range": [1, 123]
+                        }
+                    }
+                }
+                    
+            }
+        }
+    }
+}
+const teste = {
+    "pagination": {
+        "page": 2,
+        "pageSize": 1,
+        "totalPages": 3
+    },
+    "fields": {
+        "nome": "fullName",
+        "ditado": "text_1",
+        "likes": {
+            "type": "desc", 
+            "range": [1, 1000]
+        },
+        "img": "image",
+        "meu_objeto": {
+            "type": "object",
+            "fields": {
+                "nome": "name",
+                "idade": {
+                    "type": "number",
+                    "range": [1, 123]
+                }     
+            }
+        }
+    }
+}
