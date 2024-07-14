@@ -86,8 +86,10 @@ const categoriasUnsplash = [
     'parkour',
     'wild-west'
 ]
+
+const ACCESS_KEY = "STryHTcTTg4sNt-CSYUHQAdUPfkRv7lt7T_6LHfge6c"
   
-const urls = categoriasUnsplash.map(categoria => `https://source.unsplash.com/featured/?${categoria}`)
+const urls = categoriasUnsplash.map(categoria => `https://source.unsplash.com/search/photos?query=${category}&client_id=${ACCESS_KEY}`)
 
 function getImage() {
     try {
