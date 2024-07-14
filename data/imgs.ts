@@ -87,9 +87,10 @@ const categoriasUnsplash = [
     'wild-west'
 ]
 
-const ACCESS_KEY = "STryHTcTTg4sNt-CSYUHQAdUPfkRv7lt7T_6LHfge6c"
+//const ACCESS_KEY = "STryHTcTTg4sNt-CSYUHQAdUPfkRv7lt7T_6LHfge6c"
   
-const urls = categoriasUnsplash.map(categoria => `https://source.unsplash.com/search/photos?query=${category}&client_id=${ACCESS_KEY}`)
+// const urls = categoriasUnsplash.map(categoria => `https://source.unsplash.com/search/photos?query=${category}&client_id=${ACCESS_KEY}`)
+const urls = categoriasUnsplash.map(categoria => `https://picsum.photos/300`)
 
 function getImage() {
     try {
