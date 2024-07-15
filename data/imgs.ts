@@ -16,6 +16,8 @@
 //     "https://source.unsplash.com/featured/?art"
 // ];
 
+import axios from "axios"
+
 const categoriasUnsplash = [
     'nature',
     'architecture',
@@ -87,14 +89,33 @@ const categoriasUnsplash = [
     'wild-west'
 ]
 
-//const ACCESS_KEY = "STryHTcTTg4sNt-CSYUHQAdUPfkRv7lt7T_6LHfge6c"
-  
-// const urls = categoriasUnsplash.map(categoria => `https://source.unsplash.com/search/photos?query=${category}&client_id=${ACCESS_KEY}`)
-const urls = categoriasUnsplash.map(categoria => `https://picsum.photos/300`)
 
-function getImage() {
+const ACCESS_KEY = "STryHTcTTg4sNt-CSYUHQAdUPfkRv7lt7T_6LHfge6c"
+  
+const getRandomCategoria = () => {
+    return categoriasUnsplash[ Math.floor(Math.random() * categoriasUnsplash.length) ]
+}
+
+
+// const urls = categoriasUnsplash.map(categoria => `https://source.unsplash.com/search/photos?query=${categoria}&client_id=${ACCESS_KEY}`)
+
+//safe
+// const urls = categoriasUnsplash.map(categoria => `https://picsum.photos/300`)
+
+async function getImage() {
     try {
-        return urls[Math.floor(Math.random() * urls.length)]
+        const categoria = getRandomCategoria()
+        const url = `https://api.unsplash.com/search/photos?query=${categoria}&client_id=${ACCESS_KEY}`
+        const res = await axios(url)
+        const images = res.data.results
+
+        if (images.length > 0) {
+            const randomImage = images[Math.floor(Math.random() * images.length)]
+            console.log("\n\n\n", randomImage.urls.regular)
+            return randomImage.urls.regular
+        }
+        throw new Error("erro: IMAGE 121")
+        // return urls[Math.floor(Math.random() * urls.length)]
     } catch(e) { throw 'Error: Image' }
 }
 

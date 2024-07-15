@@ -8,15 +8,26 @@ interface Req {
     fields: object
 }
 
-function makeCurentPageArray(req: Req) {//pagination e fields
+function sleep(ms:number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+
+async function makeCurentPageArray(req: Req) {//pagination e fields
     try {
         const finalArray: object[] = []
+        const finalArray2: object[] = []
         
         for (let itemCont = 0; itemCont < req.pagination.pageSize; itemCont++) {
-            createAnObject(finalArray, req.fields, req.pagination, itemCont)
+            const res = await createAnObject(finalArray, req.fields, req.pagination, itemCont)
+            finalArray2.push(res)
         }
-    
-        return finalArray
+        await sleep(500)
+        console.log("/*/*------------------------")
+        console.log(finalArray2[0])
+        
+        return finalArray2[0]
     } catch(e) {
         throw e
     }

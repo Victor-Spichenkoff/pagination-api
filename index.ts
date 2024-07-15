@@ -14,12 +14,13 @@ app.get('/', (req, res) => {res.send('Olá')})
 
 
 var attemps = 0
-app.put('/pagination', (req, res) => {
-    console.log(req.body)
-    console.log(++attemps)
+app.put('/pagination', async (req, res) => {
+    // console.log(req.body)
+    // console.log(++attemps)
     
     try {
-        const thisPageArray = makeCurentPageArray(req.body)
+        const resDemorado = await makeCurentPageArray(req.body)
+        const thisPageArray = resDemorado
         const finalObject = {
             pagination: req.body.pagination,
             itens: thisPageArray

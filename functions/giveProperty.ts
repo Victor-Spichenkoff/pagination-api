@@ -10,7 +10,7 @@ import getImage from "../data/imgs";
 //recebe as props de cada key dentro de 'fields'
 
 
-function givePropertyStrings(type:string) {
+async function givePropertyStrings(type:string) {
     if(type == 'name') return getRandomName()
 
     if(type == 'fullName') return getFullName()
@@ -27,7 +27,10 @@ function givePropertyStrings(type:string) {
 
     if(type == 'number') return getSimpleNumber()//para o array
 
-    if(type == 'image') return getImage()
+    if(type == 'image') {
+        const res = await getImage()
+        return res
+    }
 }
 
 
@@ -59,10 +62,11 @@ function givePropertyArrays(infosArray: string[]) {
 }
 
 
-function selectAndGiveType(field: any, pagination: Pagination, times: number){
+async function selectAndGiveType(field: any, pagination: Pagination, times: number){
     try {
         if(typeof field == 'string') {
-            return givePropertyStrings(field)
+            const res = await givePropertyStrings(field)
+            return res
         } 
     
         if(typeof field == 'object') {

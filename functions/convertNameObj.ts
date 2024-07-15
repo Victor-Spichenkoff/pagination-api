@@ -33,7 +33,7 @@ function getValues(obj: object) {
 
 
 
-function createAnObject(array: any[], fields: object, pagination: Pagination, index: number): any[] {
+async function createAnObject(array: any[], fields: object, pagination: Pagination, index: number): Promise<any[]> {
     //array final(com tudo) // campos com valor e chave
     try{
         const finalObj: any = {}
@@ -41,8 +41,9 @@ function createAnObject(array: any[], fields: object, pagination: Pagination, in
     
         const keys = getKeysFromReq(fields)
     
-        keys.forEach((key, i )=> {
-            finalObj[key] = selectAndGiveType(types[i], pagination, index)
+        keys.forEach(async (key, i )=> {
+            const res = await selectAndGiveType(types[i], pagination, index)
+            finalObj[key] = res
         })
     
         array.push(finalObj)
