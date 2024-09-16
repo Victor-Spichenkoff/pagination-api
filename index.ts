@@ -14,6 +14,8 @@ app.get('/', (req, res) => {res.send('Olá')})
 
 
 var attemps = 0
+app.get('/pagination', (req, res) => res.send("Hello, use the method PUT"))
+
 app.put('/pagination', async (req, res) => {
     // console.log(req.body)
     // console.log(++attemps)
@@ -26,7 +28,7 @@ app.put('/pagination', async (req, res) => {
             itens: thisPageArray
         }
 
-        if(req.body.pagination.page > req.body.pagination.totalPages) return
+        if(req.body.pagination.page > req.body.pagination.totalPages) throw "Send a Body "
 
 
         res.send(finalObject)
